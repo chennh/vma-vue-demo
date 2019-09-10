@@ -1,1 +1,1 @@
-# vma-templates
+# vma-templates-web-vma-vue-demo
