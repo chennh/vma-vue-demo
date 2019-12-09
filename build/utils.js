@@ -4,7 +4,8 @@ const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 const {
-  cipher
+  cipher,
+  args
 } = require('vma-vue-assist/dist/static/js/utils')
 
 exports.assetsPath = function (_path) {
@@ -106,3 +107,18 @@ exports.createNotifierCallback = () => {
 }
 
 exports.cipherEncode = data => cipher.encodeEnv(data)
+
+exports.getProfile = function () {
+  let profile = 'prod'
+  let argv
+  try {
+    argv = JSON.parse(process.env.npm_config_argv).original
+  } catch (ex) {
+    argv = process.argv
+  }
+  let argsMap = args(argv.slice(2))
+  if (argsMap.env) {
+    profile = argsMap.env
+  }
+  return profile
+}

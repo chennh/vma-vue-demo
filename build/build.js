@@ -1,13 +1,14 @@
 'use strict'
 require('./check-versions')()
+const utils = require('./utils')
 
-var argv
-try {
-  argv = JSON.parse(process.env.npm_config_argv).original
-} catch (ex) {
-  argv = process.argv
-}
-process.env.NODE_ENV = argv[2] || 'prod'
+// var argv
+// try {
+//   argv = JSON.parse(process.env.npm_config_argv).original
+// } catch (ex) {
+//   argv = process.argv
+// }
+process.env.NODE_ENV = utils.getProfile()
 
 const ora = require('ora')
 const rm = require('rimraf')
